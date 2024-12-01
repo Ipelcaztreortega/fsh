@@ -3,18 +3,14 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const pool = new Pool({
-    user: process.env.DATABASE_USER,
-    host: process.env.DATABASE_HOST,
-    database: process.env.DATABASE_NAME,
-    password: process.env.DATABASE_PASSWORD,
-    port: Number(process.env.DATABASE_PORT),
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: Number(process.env.DB_PORT),
     ssl: {
         rejectUnauthorized: false,
     },
 });
-
-pool.connect()
-    .then(() => console.log('Connected to the database successfully!'))
-    .catch(err => console.error('Database connection error:', err));
 
 export default pool;
