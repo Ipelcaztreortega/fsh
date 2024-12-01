@@ -1,15 +1,6 @@
 import { useState, useEffect } from 'react';
-
-interface Patient {
-    patient_id: number;
-    first_name: string;
-    last_name: string;
-    date_of_birth: string;
-    gender?: string;
-    address?: string;
-    phone_number?: string;
-    email?: string;
-}
+import { Patient } from '../../types/patient';
+import { patientService } from '../../services/patientApi';
 
 export const Patients = () => {
     const [patients, setPatients] = useState<Patient[]>([]);
@@ -22,16 +13,21 @@ export const Patients = () => {
 
     const fetchPatients = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/patients');
-            if (!response.ok) {
-                throw new Error('Failed to fetch patients');
-            }
-            const data = await response.json();
+            const data = await patientService.getAll();
             setPatients(data);
         } catch (err) {
             setError(err instanceof Error ? err.message : 'An error occurred');
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleDelete = async (id: number) => {
+        try {
+            await patientService.delete(id);
+            fetchPatients();
+        } catch (err) {
+            setError(err instanceof Error ? err.message : 'Failed to delete patient');
         }
     };
 
@@ -41,7 +37,6 @@ export const Patients = () => {
     return (
         <div>
             <h1>Patients</h1>
-            
             <table>
                 <thead>
                     <tr>
@@ -49,6 +44,7 @@ export const Patients = () => {
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Date of Birth</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,6 +54,14 @@ export const Patients = () => {
                             <td>{patient.first_name}</td>
                             <td>{patient.last_name}</td>
                             <td>{patient.date_of_birth}</td>
+                            <td>
+                                <button onClick={() => {/* Add edit functionality */}}>
+                                    Edit
+                                </button>
+                                <button onClick={() => handleDelete(patient.patient_id)}>
+                                    Delete
+                                </button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
