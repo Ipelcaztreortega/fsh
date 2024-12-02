@@ -16,7 +16,7 @@ const Navbar = () => {
           <div className="flex space-x-8">
             <Link to='/'><NavLink icon={<Home size={20} />} text="Home" isActive={true} /></Link>
             <Link to='/patients'><NavLink icon={<Users size={20} />} text="Patients"/></Link>
-            <NavLink icon={<Stethoscope size={20} />} text="Doctors" />
+            <Link to='/doctors'><NavLink icon={<Stethoscope size={20} />} text="Doctors" /></Link>
             <Link to='/appointments'><NavLink icon={<Calendar size={20} />} text="Appointments" /></Link>
           </div>
         </div>

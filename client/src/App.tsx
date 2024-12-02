@@ -4,6 +4,7 @@ import Navbar from './components/Navbar/Navbar';
 import {Patients} from './pages/Patients/Patients';
 import Appointments from './pages/Appointments/Appointments';
 import MedicalRecords from './pages/MedicalRecords/MedicalRecords';
+import Doctors from './pages/Doctors/Doctors';
 import './App.css'
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path='/patients' element={<Patients />}/>
           <Route path='/appointments' element={<Appointments />}/>
           <Route path='/records' element={<MedicalRecords />} />
+          <Route path='/doctors' element={<Doctors />} />
         </Routes>
       
       </BrowserRouter>
