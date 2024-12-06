@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Patient } from '../../types/patient';
 import { patientService } from '../../services/patientApi';
+import { format } from 'date-fns';
 
 export const Patients = () => {
     const [patients, setPatients] = useState<Patient[]>([]);
@@ -31,6 +32,11 @@ export const Patients = () => {
         }
     };
 
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString);
+        return format(date, 'MMM dd, yyyy');
+    };
+
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
 
@@ -53,7 +59,7 @@ export const Patients = () => {
                             <td>{patient.patient_id}</td>
                             <td>{patient.first_name}</td>
                             <td>{patient.last_name}</td>
-                            <td>{patient.date_of_birth}</td>
+                            <td>{formatDate(patient.date_of_birth)}</td>
                             <td>
                                 <button onClick={() => {/* Add edit functionality */}}>
                                     Edit
