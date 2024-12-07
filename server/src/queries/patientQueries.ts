@@ -1,3 +1,5 @@
+// queries/patientQueries.ts
+
 export const patientQueries = {
     getPatients: 'SELECT * FROM patients',
     getPatientById: 'SELECT * FROM patients WHERE patient_id = $1',
